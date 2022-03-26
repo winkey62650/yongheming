@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)http://127.0.0.1:8848/leavehelper_20210930/outschool/student-outschool.html -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>出入凭证</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="./出入凭证_files/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="./出入凭证_files/app.css" />
+    <style>
+      .infoBox {
+        padding: 0 5px;
+        line-height: 30px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 20px 0;
+      }
+
+      .content p {
+        color: #333;
+        line-height: 25px;
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .btnBox {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .btnBox button {
+        min-width: 70%;
+        font-size: 35px;
+        height: 200px;
+      }
+
+      .timeBox {
+        text-align: center;
+        font-weight: bold;
+        font-size: 26px;
+        color: red;
+        margin-top: 15px;
+        padding: 0 10px;
+        margin: 40px auto 0 auto;
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+      }
+      .loseTime {
+        font-size: 16px;
+      }
+
+      #remainingTime {
+        text-align: center;
+        color: red;
+      }
+
+      @keyframes kf-black {
+        from {
+          color: black;
+        }
+
+        to {
+          color: #eee;
+        }
+      }
+
+      @keyframes kf-greenyellow {
+        from {
+          color: greenyellow;
+        }
+
+        to {
+          color: #eee;
+        }
+      }
+
+      @keyframes kf-blueviolet {
+        from {
+          color: blueviolet;
+        }
+
+        to {
+          color: #eee;
+        }
+      }
+
+      @keyframes kf-green {
+        from {
+          color: green;
+        }
+
+        to {
+          color: #eee;
+        }
+      }
+
+      @keyframes kf-cyan {
+        from {
+          color: cyan;
+        }
+
+        to {
+          color: #eee;
+        }
+      }
+
+      @keyframes kf-blue {
+        from {
+          color: blue;
+        }
+
+        to {
+          color: #eee;
+        }
+      }
+
+      @keyframes kf-purple {
+        from {
+          color: purple;
+        }
+
+        to {
+          color: #eee;
+        }
+      }
+
+      #typeBox {
+        font-size: 100px;
+        font-weight: bold;
+        color: #000;
+        width: 160px;
+        line-height: normal;
+        text-align: center;
+        display: block;
+        margin: 50px auto 0px auto;
+      }
+
+      @-webkit-keyframes myfirst
+
+			/* Safari and Chrome */ {
+        from {
+          border: 3px solid #0000ff;
+        }
+
+        to {
+          border: 3px solid #fff;
+        }
+      }
+
+      #checkCode {
+        text-align: center;
+        color: red;
+        font-size: 26px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body
+    style="background: #fff"
+    class="mui-android mui-android-5 mui-android-5-0"
+  >
+    <div class="infoBox">
+      <div class="title" style="text-align: center">
+        <font class="typeTxt">出</font>校凭证
+      </div>
+      <div class="content">
+        <p style="text-indent: 2em">
+          <span
+            id="studentName"
+            style="text-decoration: none; font-weight: bold"
+            >张三（1815492xxx）</spa
+          >
+          同学可于
+          <span id="startTime" style="font-weight: bold">2021-10-01</span>
+
+          <font class="typeTxt">出</font>校。
+        </p>
+        <div id="remainingTime" class="timeBox loseTime">该凭证00:05:00后即将失效，请尽快出校</div>
+      </div>
+      <div style="overflow: hidden">
+        <div
+          id="typeBox"
+          style="animation: 0.6s ease 0s infinite normal none running kf-blue"
+        >
+          出
+        </div>
+        <!-- <div id="checkCode">（查健康码）</div> -->
+        <div id="timeBox" class="timeBox">2021-10-01 14:17:17</div>
+        <div id="tipBox"></div>
+      </div>
+    </div>
+
+    <script>
+      document.write(
+        '<script src="//' +
+          (location.host || 'localhost').split(':')[0] +
+          ':35929/livereload.js?snipver=1"></' +
+          'script>'
+      )
+    </script>
+    <script src="./出入凭证_files/livereload.js.下载"></script>
+    <script>
+      document.addEventListener('LiveReloadDisconnect', function () {
+        setTimeout(function () {
+          window.location.reload()
+        }, 500)
+      })
+    </script>
+    <script src="https://ygj.gduf.edu.cn/leavehelper_20210930/js/mui.min.js"></script>
+    <script src="https://ygj.gduf.edu.cn/leavehelper_20210930/js/jquery.min.js"></script>
+    <script src="https://ygj.gduf.edu.cn/leavehelper_20210930/js/common.js"></script>
+    <script src="https://ygj.gduf.edu.cn/leavehelper_20210930/js/yb_h5.js"></script>
+
+    <script>
+      var request = getRequest()
+      var outSchoolID = request['outSchoolID']
+      var type = decodeURI(request['type'])
+      var now = 0
+      var nowT
+      var st
+      var data
+      var text = '出'
+
+      var endTime = 0
+      var dateColorArr = [
+        'kf-greenyellow',
+        'kf-black',
+        'kf-blueviolet',
+        'kf-green',
+        'kf-cyan',
+        'kf-blue',
+        'kf-black'
+      ]
+      mui.init()
+      mui.ready(function () {
+        getMyOutSchool()
+      })
+
+      function getMyOutSchool() {
+        if (true) {
+          if (now == 0) {
+            now = new Date().getTime()
+            var s = 300000
+            nowT = setInterval(function () {
+              now = now + 1000
+              $('#timeBox').html(new Date(now).Format('yyyy-MM-dd hh:mm:ss'))
+              s = s - 1000
+              $('#remainingTime')[0].innerHTML =
+                '该凭证<b>' +
+                formatDuring(s) +
+                '</b>后将失效，请尽快' +
+                text +
+                '校'
+
+              // if (endTime < now) {
+              // 	$("#tipBox").html("<center style='color:red'>凭证失效，请再次申请，并联系辅导员审批。</center>");
+              // 	$("#typeBox").hide();
+              // 	$("#timeBox").hide();
+              // 	$("#remainingTime").hide();
+              // }
+            }, 1000)
+          }
+
+          if (true) {
+            var b = now
+            $('#startTime').html(new Date(b).Format('yyyy-MM-dd'))
+
+            endTime = new Date()
+            b = now
+            $('#endTime').html(new Date(b).Format('yyyy-MM-dd hh:mm:ss'))
+
+            $('#inSchoolEndTime').html(
+              new Date(b).Format('yyyy-MM-dd hh:mm:ss')
+            )
+
+            $('#typeBox').html('出')
+            $('#studentName').click(function(){
+                var word = prompt('更改姓名学号：姓名（学号）')
+                if(word){
+                    $('#studentName').html(`${word}同学可于
+          <span id="startTime" style="font-weight: bold">${new Date(b).Format('yyyy-MM-dd')}</span>
+
+          <font class="typeTxt">出</font>校。`)
+                }
+            })
+            $('#typeBox').click(function () {
+              if ($('#typeBox').html() == '出') {
+                $('#typeBox').html('入')
+                text = '入'
+              } else {
+                $('#typeBox').html('出')
+                text = '出'
+              }
+            })
+
+            $('#typeBox').css(
+              'animation',
+              dateColorArr[new Date().getDay()] + ' 0.6s infinite'
+            )
+            $('#typeBox').css(
+              '-webkit-animation',
+              dateColorArr[new Date().getDay()] + ' 0.6s infinite'
+            )
+
+            if ('c' == '出') {
+              //$("#typeBox").css("border-color", "green");
+              //$("#timeBox").addClass("greenTime");
+            } else {
+              $('#rxbz').remove()
+              $('.typeTxt').html('出')
+              if (getCookie('school') == '清远校区') {
+                if (result.data[0].outAddress.indexOf('广东省清远市') != 0) {
+                  $('#checkCode').html('（查健康码）')
+                }
+              }
+              if (getCookie('school') == '肇庆校区') {
+                if (result.data[0].outAddress.indexOf('广东省肇庆市') != 0) {
+                  $('#checkCode').html('（查健康码）')
+                }
+              }
+              if (true) {
+                $('#checkCode').html('（查健康码）')
+              }
+            }
+
+            if (false) {
+              // $("#tipBox").html("<center style='color:red'>凭证失效，请再次申请，并联系辅导员审批。</center>");
+              // $("#typeBox").hide();
+              // $("#timeBox").hide();
+              // $("#checkCode").hide();
+              $('body').show()
+            } else {
+              $('body').show()
+            }
+          }
+        }
+      }
+
+      // 		function getMyOutSchool() {
+      // 			//mui.toast("ss")
+      // 			mui.ajax({
+      // 				url: remoteUrl + "handler/outschool.ashx?flag=getPassRecord",
+      // 				data: {
+      // 					studentID: getCookie("studentID"),
+      // 					outSchoolID: outSchoolID,
+      // 					type: type,
+      // 				},
+      // 				type: "POST",
+      // 				success: function(result) {
+      // 					data = result.data[0];
+      // 					if (result.code == 0) {
+      // 						if (now == 0) {
+      // 							now = new Date(result.now.replaceAll("-", "/")).getTime();
+      // 							nowT = setInterval(function() {
+      // 								now = now + 1000;
+      // 								$("#timeBox").html(new Date(now).Format("yyyy-MM-dd hh:mm:ss"));
+      // 								var s = endTime - now;
+      // 								$("#remainingTime").html("该凭证<b>" + formatDuring(s) + "</b>后将失效，请尽快" + result.data[0].type + "校");
+      //
+      // 								if (endTime < now) {
+      // 									$("#tipBox").html("<center style='color:red'>凭证失效，请再次申请，并联系辅导员审批。</center>");
+      // 									$("#typeBox").hide();
+      // 									$("#timeBox").hide();
+      // 									$("#remainingTime").hide();
+      // 								}
+      //
+      // 							}, 1000);
+      // 						}
+      //
+      // 						if (result.data.length > 0 && result.data[0].status == 1) {
+      // 							var b = result.data[0].startTime.replaceAll("-", "/");
+      // 							$("#startTime").html(new Date(b).Format("yyyy-MM-dd"));
+      //
+      // 							endTime = (new Date(result.data[0].endTime.replaceAll("-", "/"))).getTime();
+      // 							b = result.data[0].endTime.replaceAll("-", "/");
+      // 							$("#endTime").html(new Date(b).Format("yyyy-MM-dd hh:mm:ss"));
+      //
+      // 							b = result.data[0].inSchoolEndTime.replaceAll("-", "/");
+      // 							$("#inSchoolEndTime").html(new Date(b).Format("yyyy-MM-dd hh:mm:ss"));
+      // 							$("#studentName").html(result.data[0].studentName + "（" + result.data[0].studentID + "）");
+      //
+      // 							$("#typeBox").html(result.data[0].type);
+      // 							$("#typeBox").css("animation", dateColorArr[new Date().getDay()] + " 0.6s infinite");
+      // 							$("#typeBox").css("-webkit-animation", dateColorArr[new Date().getDay()] + " 0.6s infinite");
+      //
+      // 							if (result.data[0].type == "出") {
+      // 								//$("#typeBox").css("border-color", "green");
+      // 								//$("#timeBox").addClass("greenTime");
+      // 							} else {
+      // 								$("#rxbz").remove();
+      // 								$(".typeTxt").html(result.data[0].type);
+      // 								if (getCookie("school") == "清远校区") {
+      // 									if (result.data[0].outAddress.indexOf("广东省清远市") != 0) {
+      // 										$("#checkCode").html("（查健康码）");
+      // 									}
+      // 								}
+      // 								if (getCookie("school") == "肇庆校区") {
+      // 									if (result.data[0].outAddress.indexOf("广东省肇庆市") != 0) {
+      // 										$("#checkCode").html("（查健康码）");
+      // 									}
+      // 								}
+      // 								if (getCookie("school") == "广州校本部") {
+      // 									if (result.data[0].outAddress.indexOf("广东省广州市") != 0) {
+      // 										$("#checkCode").html("（查健康码）");
+      // 									}
+      // 								}
+      // 							}
+      //
+      // 							if (endTime < now) {
+      // 								$("#tipBox").html("<center style='color:red'>凭证失效，请再次申请，并联系辅导员审批。</center>");
+      // 								$("#typeBox").hide();
+      // 								$("#timeBox").hide();
+      // 								$("#checkCode").hide();
+      // 								$("body").show();
+      // 							} else {
+      // 								$("body").show();
+      // 							}
+      // 						}
+      // 					}
+      // 				}
+      // 			});
+      // 		}
+
+      function formatDuring(mss) {
+        var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        hours = hours < 10 ? '0' + hours : hours
+        var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60))
+        minutes = minutes < 10 ? '0' + minutes : minutes
+        var seconds = (mss % (1000 * 60)) / 1000
+        seconds = seconds < 10 ? '0' + seconds : seconds
+        return hours + ':' + minutes + ':' + seconds
+      }
+    </script>
+  </body>
+</html>
