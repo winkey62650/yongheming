@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="theme-color" content="#6DB0FA" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>生成出入凭证</title>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="title">生成出入凭证</h1>
+  </header>
+  <main>
+    <div class="form">
+      <div>
+        <div>姓名</div>
+        <input value="雍和明" id="studentName" />
+      </div>
+      <div>
+        <div>学号</div>
+        <input value="114514" id="studentId" />
+      </div>
+      <div>
+        <div>color</div>
+        <input value= 1 id="color" />
+      </div>
+      <div>
+        <button id="out">出</button>
+        <button id="in">入</button>
+      </div>
+      <br>
+      <div>
+        <p class="tips" style="color: red;">在出入凭证页面单击屏幕可以全屏显示</p>
+      </div>
+    </div>
+    <p>
+      dateColorArr = ['yellow', 'black', 'kf-blueviolet', 'kf-green', 'kf-cyan', 'kf-blue', 'kf-purple']
+    </p>
+  </main>
+  <script src="./js/jquery.min.js"></script>
+  <script>
+    var studentName = $("#studentName");
+    var studentId = $("#studentId");
+    var color = $("#color")
+    var out = $("#out");
+    var getin = $("#in");
+
+    //进入全屏
+    function enterFullScreen() {
+      var de = document.documentElement;
+      if (de.requestFullscreen) {
+        de.requestFullscreen();
+      } else if (de.mozRequestFullScreen) {
+        de.mozRequestFullScreen();
+      } else if (de.webkitRequestFullScreen) {
+        de.webkitRequestFullScreen();
+      }
+    }
+    //退出全屏
+    function exitFullScreen() {
+      var de = document;
+      if (de.exitFullscreen) {
+        de.exitFullscreen();
+      } else if (de.mozCancelFullScreen) {
+        de.mozCancelFullScreen();
+      } else if (de.webkitCancelFullScreen) {
+        de.webkitCancelFullScreen();
+      }
+    }
+
+    out.on('click', function () {
+      location.href = `show.html?studentId=${studentId.val()}&studentName=${studentName.val()}&color=${color.val()}&fun=0`
+    })
+    getin.on('click', function () {
+      location.href = `show.html?studentId=${studentId.val()}&studentName=${studentName.val()}&color=${color.val()}&fun=1`
+    })
+  </script>
+</body>
+
+</html>
